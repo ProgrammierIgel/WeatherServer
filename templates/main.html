@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wetter {{loc}}</title>
+    <style>
+        div {
+            display: flex;
+
+            background-color: red;
+            justify-content: center;
+        }
+        #div{align-items:center;
+        justify-content: : space-around;
+        display: flex;
+        }
+    </style>
+</head>
+<body>
+<b>Gerade sind in {{loc}} {{((weather.current.temperature - 32)*5/9)|int }}°C</b><br/>
+
+<br/>
+<div id="div">
+{% for forecast in weather.forecasts %}
+<div>
+Am {{ forecast.date.strftime('%d.%m.%Y') }} waren es:<br/>
+          {% for j in forecast.hourly %}
+          um {{j.time.strftime('%H:%m')}} {{ ((j.temperature  - 32)*5/9) |int }}°C{{j.temperature}}<br/>
+    {% endfor %}<br/>
+    </div>
+
+    {% endfor %}
+    </div>
+</body>
+</html>

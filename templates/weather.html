@@ -1,0 +1,42 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WETTER</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" defer></script>
+    <script src="../static/weather.js" defer></script>
+    <link rel="stylesheet" href="../static/weather.css" type="text/css" />
+    <link rel="shortcut icon" href="../static/sunny.png">
+    
+  </head>
+  <body>
+    
+    {% for weather in weathers %}
+    <div id="citys">
+      <div class="city" onclick="delete_entry('{{weather[0]}}')">
+        <div class="delete" style="visibility: hidden" >X</div>
+        <b id="name">{{weather[0]}}</b><br />
+        {% for forecast in weather[1].forecasts %}
+        <div id="day"></div>
+        Am {{ forecast.date.strftime('%d.%m.%Y') }} waren es:<br />
+        
+        <div id="day">
+          {% for j in forecast.hourly %} um {{j.time.strftime('%H:%m')}}
+          {{((j.temperature - 32)*(5/9))|int}}°C, {{j.description}}<br />
+          {% endfor %}<br />
+        </div>
+        {% if weather[1].current.description == "sunny"%}
+        
+        {%endif%}
+        {% endfor %}<br />
+        <img src = "../static/sunny.png" width = "100" height="100" alt = "sun">
+      </div>
+      {%endfor%}
+
+     
+      </div>
+    </div>
+    <div onclick="add()" id="add">+</div>
+  </body>
+</html>
